@@ -207,7 +207,7 @@ function createTile(nick){
   const p = entry.player = new Twitch.Player(id, {channel:nick, parent:[parent], width:'100%', height:'100%', muted:true, autoplay:true});
   const setLive = on => { badge.textContent = on ? 'В ЭФИРЕ' : 'ОФЛАЙН'; badge.classList.toggle('off', !on); };
   p.addEventListener(Twitch.Player.ONLINE, ()=>setLive(true));
-  p.addEventListener(Twitch.Player.PLAYING, ()=>{ setLive(true); applyQuality(nick); });
+  p.addEventListener(Twitch.Player.PLAYING, ()=>{ setLive(true); applyQuality(nick); setTimeout(()=>applyQuality(nick), 4000); });
   p.addEventListener(Twitch.Player.OFFLINE, ()=>setLive(false));
 }
 
