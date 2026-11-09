@@ -22,38 +22,31 @@ button:hover{filter:brightness(1.2)}
 main{display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:20px;padding:20px}
 @media (max-width:1100px){main{grid-template-columns:1fr}}
 .left{min-width:0}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row dense;gap:12px;align-content:start}
-.tile.active{grid-column:span 3;order:-2}
-.chattile{order:-1;grid-column:span 1;border-radius:14px;overflow:hidden;background:#18181b;min-height:300px}
-.chattile iframe{width:100%;height:100%;border:0;display:block}
-.addtile{order:99999}
-.pl,.pl iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.frame .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;color:#ffffff22}
-.tile:not(.active) .frame .pl{pointer-events:none}
-.tile .tw{display:none;font-size:13px;color:var(--muted);margin-left:8px}
-.tile.active .tw{display:inline}
-.tile.active .nick{font-size:20px}
-@media (max-width:1500px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.tile.active{grid-column:1/-1}.chattile{grid-column:1/-1;height:360px;min-height:0}}
-@media (max-width:700px){.grid{grid-template-columns:1fr}.chattile{display:none}}
-.tile{background:var(--panel);border-radius:14px;overflow:hidden;border:2px solid transparent;cursor:pointer;transition:.15s}
-.addtile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:2px dashed var(--line);background:none;min-height:160px;color:var(--muted);padding:14px}
-.addtile:hover{border-color:var(--purple);color:var(--text)}
-.addtile .plus{font-size:48px;font-weight:300;line-height:1}
-.addtile form{display:flex;flex-direction:column;gap:8px;width:100%}
-.addtile input{padding:10px 12px}
-.tile.active{border-color:var(--purple);box-shadow:0 0 0 4px #a64dff33}
-.frame{position:relative;aspect-ratio:16/9;background:#000}
-.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.live{position:absolute;top:8px;left:8px;font-size:11px!important;background:var(--red);color:#fff;font-weight:800;font-size:13px;padding:3px 8px;border-radius:6px;z-index:2;pointer-events:none}
-.meta{display:flex;align-items:center;gap:10px;padding:10px 12px}
-.nick{font-weight:800}
-.score-badge{margin-left:auto;font-weight:900;font-size:18px}
-.score-badge span{font-size:11px;color:var(--muted)}
-.x{background:none;color:var(--muted);padding:4px 8px}
+.leader{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.leader h2{margin:0 0 12px;font-size:22px;font-weight:900}
+.lb-wrap{overflow-x:auto}
+#lb{width:100%;border-collapse:collapse;font-size:14px;white-space:nowrap}
+#lb th{color:var(--muted);font-weight:600;font-size:12px;text-align:center;padding:8px 10px;border-bottom:1px solid var(--line)}
+#lb th:nth-child(2){text-align:left}
+#lb td{padding:10px;text-align:center;border-bottom:1px solid var(--line)}
+#lb td.n{text-align:left;font-weight:800;cursor:pointer}
+#lb td.n:hover{color:var(--purple)}
+#lb tr.cur td{background:#a64dff14}
+#lb td.place{font-weight:900;color:var(--muted);width:40px}
+#lb tr:nth-child(2) td.place{color:#ffd54a}#lb tr:nth-child(3) td.place{color:#cfd8e3}#lb tr:nth-child(4) td.place{color:#e0a26b}
+#lb td.tot{font-size:22px;font-weight:900}
+#lb td.tot span{font-size:11px;color:var(--muted);font-weight:600}
+#lb td.none{color:var(--muted)}
+#lb .del{background:none;color:var(--muted);padding:4px 8px;font-size:14px}
+#lb .del:hover{color:var(--red)}
+.addrow{display:flex;gap:10px;margin-top:14px}
+.addrow input{flex:1}
+.addrow button{white-space:nowrap}
+@media (max-width:700px){.addrow{flex-direction:column}}
+.twbtn{display:inline-block;background:#9146ff;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:7px 12px;border-radius:10px}
+.twbtn:hover{filter:brightness(1.15)}
 aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow-y:auto}
 @media (max-width:1100px){aside{position:static;max-height:none}}
-.warn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--muted);font-size:15px;line-height:1.5}
-.warn code{color:var(--text);background:#ffffff14;padding:2px 6px;border-radius:6px}
 .card{background:var(--panel);border-radius:22px;padding:16px;border:1px solid var(--line)}
 .who{font-size:13px;color:var(--muted);margin-bottom:10px}
 .who b{color:var(--text);font-size:18px}
@@ -76,7 +69,6 @@ textarea{min-height:140px;resize:vertical}
 .total{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:14px}
 .total .num{font-size:120px;letter-spacing:-4px;font-weight:900;line-height:1}
 .total sup{color:var(--muted);font-size:24px;font-weight:600}
-.live.off{background:#444}
 aside .logo{font-size:44px;line-height:1}
 [hidden]{display:none!important}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--purple);padding:12px 20px;border-radius:12px;font-weight:700;opacity:0;transition:.3s;pointer-events:none}
@@ -87,7 +79,14 @@ aside .logo{font-size:44px;line-height:1}
 
 <main>
   <section class="left">
-    <div class="grid" id="grid"></div>
+    <div class="leader">
+      <h2>Таблица лидеров</h2>
+      <div class="lb-wrap"><table id="lb"></table></div>
+      <form class="addrow" id="addForm">
+        <input id="nickInput" placeholder="Ник или ссылка на Twitch (можно несколько через запятую)">
+        <button class="primary">+ Добавить стримершу</button>
+      </form>
+    </div>
   </section>
 
   <aside>
@@ -113,7 +112,6 @@ aside .logo{font-size:44px;line-height:1}
 
 <div class="toast" id="toast"></div>
 
-<script src="https://player.twitch.tv/js/embed/v1.js"></script>
 <script>
 const BASE = [
   {k:'skill', n:'Скилл / Механика'},
@@ -139,7 +137,6 @@ let current = null;
 let vals = {};
 
 const $ = id => document.getElementById(id);
-const parent = location.hostname || 'localhost';
 
 function calc(v){
   const sum = BASE.reduce((s,b)=>s+(+v[b.k]||1),0);
@@ -147,108 +144,31 @@ function calc(v){
   return Math.min(90, Math.round(sum*1.4*m));
 }
 
-const tiles = {};      // nick -> {el, player}
-let chatTile = null;
-const canEmbed = () => location.protocol!=='file:' && !!window.Twitch;
-
-// Плитки создаются один раз; при клике меняется только CSS-класс, плееры не перезагружаются
-function renderGrid(){
-  const g = $('grid');
-  if(!chatTile){
-    chatTile = document.createElement('div');
-    chatTile.className = 'chattile';
-    chatTile.innerHTML = '<iframe title="Чат Twitch"></iframe>';
-    g.appendChild(chatTile);
-    g.appendChild(addTile());
-  }
-  Object.keys(tiles).forEach(n=>{ if(!streams.includes(n)){ tiles[n].el.remove(); delete tiles[n]; } });
-  streams.forEach(nick=>{ if(!tiles[nick]) createTile(nick); });
-  Object.entries(tiles).forEach(([n,t])=>{
-    t.el.classList.toggle('active', n===current);
-    t.el.style.order = n===current ? -2 : streams.indexOf(n);
-    updateBadge(n);
+function renderLeaderboard(){
+  const cols = [...BASE, MULT];
+  const rows = streams.map(n=>({n, r:reviews[n]})).sort((a,b)=>(b.r?.total??-1)-(a.r?.total??-1));
+  let place = 0;
+  $('lb').innerHTML = `<tr><th>#</th><th>Стримерша</th>${cols.map(c=>`<th>${c.n}</th>`).join('')}<th>Итог</th><th></th><th></th></tr>` +
+    rows.map(({n,r})=>`<tr class="${n===current?'cur':''}">
+      <td class="place">${r ? ++place : '—'}</td>
+      <td class="n" data-n="${n}">${n}</td>
+      ${cols.map(c=>`<td class="${r?'':'none'}">${r ? (r.vals[c.k]||1) : '—'}</td>`).join('')}
+      <td class="tot ${r?'':'none'}">${r ? r.total+'<span>/90</span>' : '—'}</td>
+      <td><a class="twbtn" href="https://www.twitch.tv/${n}" target="_blank" rel="noopener">Перейти на Twitch</a></td>
+      <td><button class="del" data-n="${n}" title="Убрать">✕</button></td>
+    </tr>`).join('');
+  $('lb').querySelectorAll('td.n').forEach(td=>td.onclick=()=>select(td.dataset.n));
+  $('lb').querySelectorAll('.del').forEach(b=>b.onclick=()=>{
+    streams = streams.filter(x=>x!==b.dataset.n); save('izhp_streams', streams);
+    if(current===b.dataset.n) select(streams[0]||null); else renderLeaderboard();
   });
-  chatTile.style.display = current ? '' : 'none';
 }
 
-function createTile(nick){
-  const t = document.createElement('div');
-  t.className = 'tile';
-  const id = 'p_'+nick.replace(/[^a-z0-9_]/g,'_');
-  t.innerHTML = `
-    <div class="frame">
-      <div class="ph">ИЖП</div>
-      <div class="live off">ЗАГРУЗКА</div>
-      <div class="pl" id="${id}"></div>
-    </div>
-    <div class="meta">
-      <span class="nick">${nick}</span><a class="tw" href="https://www.twitch.tv/${nick}" target="_blank" rel="noopener">Открыть на Twitch ↗</a>
-      <span class="score-badge"></span>
-      <button class="x" title="Убрать">✕</button>
-    </div>`;
-  t.onclick = e => {
-    if(e.target.closest('.tw')) return;
-    if(e.target.classList.contains('x')){
-      streams = streams.filter(s=>s!==nick); save('izhp_streams',streams);
-      if(current===nick) select(streams[0]||null); else renderGrid();
-      return;
-    }
-    if(current!==nick) select(nick);
-  };
-  $('grid').appendChild(t);
-  const entry = tiles[nick] = {el:t, player:null};
-  const badge = t.querySelector('.live');
-  if(location.protocol==='file:'){
-    badge.remove();
-    t.querySelector('.ph').innerHTML = '<div class="warn"><div>Плеер работает только с сервера.<br><code>python3 -m http.server</code></div></div>';
-    return;
-  }
-  if(!window.Twitch){ badge.textContent='ПЛЕЕР НЕ ЗАГРУЗИЛСЯ'; return; }
-  const p = entry.player = new Twitch.Player(id, {channel:nick, parent:[parent], width:'100%', height:'100%', muted:true, autoplay:true});
-  const setLive = on => { badge.textContent = on ? 'В ЭФИРЕ' : 'ОФЛАЙН'; badge.classList.toggle('off', !on); };
-  p.addEventListener(Twitch.Player.ONLINE, ()=>setLive(true));
-  p.addEventListener(Twitch.Player.PLAYING, ()=>{ setLive(true); applyQuality(nick); setTimeout(()=>applyQuality(nick), 4000); });
-  p.addEventListener(Twitch.Player.OFFLINE, ()=>setLive(false));
-}
-
-// маленькие плитки — низкое качество, большая — лучшее
-function applyQuality(nick){
-  const p = tiles[nick]?.player; if(!p) return;
-  try{
-    const q = (p.getQualities()||[]).map(x=>x.group||x.name).filter(x=>x && x!=='auto');
-    if(!q.length) return;
-    p.setQuality(nick===current ? q[0] : q[q.length-1]);
-  }catch(e){}
-}
-
-function updateBadge(nick){
-  const t = tiles[nick]; if(!t) return;
-  const r = reviews[nick];
-  t.el.querySelector('.score-badge').innerHTML = r ? r.total+'<span>/90</span>' : '<span>не оценена</span>';
-}
-
-function addTile(){
-  const a = document.createElement('div');
-  a.className = 'tile addtile';
-  const reset = () => { a.innerHTML = '<div class="plus">+</div><div>Добавить стримершу</div>'; };
-  reset();
-  a.onclick = () => {
-    if(a.querySelector('form')) return;
-    a.innerHTML = `<form><input placeholder="Ник или ссылка на Twitch">
-      <button class="primary">Добавить</button></form>`;
-    const f = a.querySelector('form'), i = f.querySelector('input');
-    i.focus();
-    i.onkeydown = e => { if(e.key==='Escape'){ e.stopPropagation(); reset(); } };
-    f.onsubmit = e => {
-      e.preventDefault();
-      const nicks = i.value.split(/[,\s]+/).map(s=>s.trim().toLowerCase().replace(/^.*twitch\.tv\//,'').replace(/[\/?#].*$/,'')).filter(Boolean);
-      nicks.forEach(n=>{ if(!streams.includes(n)) streams.push(n) });
-      save('izhp_streams',streams);
-      setTimeout(reset);
-      if(!current && streams.length) select(streams[0]); else renderGrid();
-    };
-  };
-  return a;
+function addNicks(raw){
+  const nicks = raw.split(/[,\s]+/).map(x=>x.trim().toLowerCase().replace(/^.*twitch\.tv\//,'').replace(/[\/?#].*$/,'')).filter(Boolean);
+  nicks.forEach(n=>{ if(!streams.includes(n)) streams.push(n) });
+  save('izhp_streams', streams);
+  if(!current && streams.length) select(streams[0]); else renderLeaderboard();
 }
 
 function slider(def, color, container){
@@ -278,17 +198,13 @@ function updateTotal(){
 }
 
 function select(nick){
-  const prev = current;
   current = nick;
   const r = nick && reviews[nick];
   vals = r ? {...r.vals} : {};
   $('title').value = r ? r.title : '';
   $('text').value = r ? r.text : '';
-  $('who').innerHTML = nick ? `Рецензия на: <b>${nick}</b>` : 'Кликни на стримершу, чтобы оценить';
-  renderScales(); renderGrid();
-  if(prev && tiles[prev]?.player){ try{ tiles[prev].player.setMuted(true) }catch(e){} applyQuality(prev); }
-  if(nick && tiles[nick]?.player){ try{ tiles[nick].player.setMuted(false) }catch(e){} applyQuality(nick); }
-  if(nick && location.protocol!=='file:') chatTile.querySelector('iframe').src = `https://www.twitch.tv/embed/${encodeURIComponent(nick)}/chat?parent=${parent}&darkpopout`;
+  $('who').innerHTML = nick ? `Рецензия на: <b>${nick}</b>` : 'Выбери стримершу в таблице';
+  renderScales(); renderLeaderboard();
 }
 
 // автосейв: любое изменение сразу пишется в localStorage
@@ -296,14 +212,15 @@ function autosave(){
   if(!current) return;
   reviews[current] = {vals:{...vals}, title:$('title').value, text:$('text').value, total:calc(vals)};
   save('izhp_reviews', reviews);
-  updateBadge(current);
+  renderLeaderboard();
 }
 
 function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800); }
 
+$('addForm').onsubmit = e => { e.preventDefault(); addNicks($('nickInput').value); $('nickInput').value=''; };
 $('title').oninput = autosave;
 $('text').oninput = () => { updateTotal(); autosave(); };
-$('clear').onclick = () => { vals={}; $('title').value=''; $('text').value=''; renderScales(); if(current){ delete reviews[current]; save('izhp_reviews',reviews); updateBadge(current); } };
+$('clear').onclick = () => { vals={}; $('title').value=''; $('text').value=''; renderScales(); if(current){ delete reviews[current]; save('izhp_reviews',reviews); renderLeaderboard(); } };
 
 renderScales();
 select(streams[0] || null);
