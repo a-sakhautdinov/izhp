@@ -29,8 +29,10 @@ main{display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:20px;padding:20p
 #lb th{color:var(--muted);font-weight:600;font-size:12px;text-align:center;padding:8px 10px;border-bottom:1px solid var(--line)}
 #lb th:nth-child(2){text-align:left}
 #lb td{padding:10px;text-align:center;border-bottom:1px solid var(--line)}
-#lb td.n{text-align:left;font-weight:800;cursor:pointer}
-#lb td.n:hover{color:var(--purple)}
+#lb td.n{text-align:left;font-weight:800}
+#lb tr[data-n]{cursor:pointer}
+#lb tr[data-n]:hover td{background:#ffffff0a}
+#lb tr[data-n]:hover td.n{color:var(--purple)}
 #lb tr.cur td{background:#a64dff14}
 #lb td.place{font-weight:900;color:var(--muted);width:40px}
 #lb tr:nth-child(2) td.place{color:#ffd54a}#lb tr:nth-child(3) td.place{color:#cfd8e3}#lb tr:nth-child(4) td.place{color:#e0a26b}
@@ -149,7 +151,7 @@ function renderLeaderboard(){
   const rows = streams.map(n=>({n, r:reviews[n]})).sort((a,b)=>(b.r?.total??-1)-(a.r?.total??-1));
   let place = 0;
   $('lb').innerHTML = `<tr><th>#</th><th>Стримерша</th>${cols.map(c=>`<th>${c.n}</th>`).join('')}<th>Итог</th><th></th><th></th></tr>` +
-    rows.map(({n,r})=>`<tr class="${n===current?'cur':''}">
+    rows.map(({n,r})=>`<tr data-n="${n}" class="${n===current?'cur':''}">
       <td class="place">${r ? ++place : '—'}</td>
       <td class="n" data-n="${n}">${n}</td>
       ${cols.map(c=>`<td class="${r?'':'none'}">${r ? (r.vals[c.k]||1) : '—'}</td>`).join('')}
@@ -157,7 +159,7 @@ function renderLeaderboard(){
       <td><a class="twbtn" href="https://www.twitch.tv/${n}" target="_blank" rel="noopener">Перейти на Twitch</a></td>
       <td><button class="del" data-n="${n}" title="Убрать">✕</button></td>
     </tr>`).join('');
-  $('lb').querySelectorAll('td.n').forEach(td=>td.onclick=()=>select(td.dataset.n));
+  $('lb').querySelectorAll('tr[data-n]').forEach(tr=>tr.onclick=e=>{ if(e.target.closest('a,button')) return; select(tr.dataset.n); });
   $('lb').querySelectorAll('.del').forEach(b=>b.onclick=()=>{
     streams = streams.filter(x=>x!==b.dataset.n); save('izhp_streams', streams);
     if(current===b.dataset.n) select(streams[0]||null); else renderLeaderboard();
